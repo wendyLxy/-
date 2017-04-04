@@ -1,0 +1,27 @@
+<ion-view view-title="详情页面">
+    <ion-nav-bar class="bar-positive ">
+        <ion-nav-buttons side="left">
+            <a href="javascript:history.back(-1)" class="button button-icon icon ion-ios-arrow-thin-left" nav-direction="back"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="has-header">
+        <ion-list>
+
+            <ion-item ><img class="xqimg" src="{{str.image}}" alt=""></ion-item>
+            <ion-item>{{str.title}}</ion-item>
+            <ion-item >商品价格：<span style="color:red;">￥{{str.price}}元</span></ion-item>
+            <ion-item class="xqgoods"><span>购买数量：</span>
+              <button ng-click="jian()" >-</button>
+                <!--<input type="text" ng-model="count"/>-->
+                <span ng-bind="count"></span>
+                <button ng-click="jia()">+</button>
+            </ion-item>
+            <ion-item class="xqshop">
+                <button ng-click="addshopcar()">加入购物车</button>
+                <button>立即购买</button>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+
+</ion-view>

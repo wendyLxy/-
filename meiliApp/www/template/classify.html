@@ -1,0 +1,43 @@
+<ion-view view-title="其他页面" style="background:#ccc;">
+<ion-header-bar class="bar-stable bar-light" style="background:#ffffff">
+<button class="button button-icon icon ion-ios-search-strong"></button>
+<h1 class="title">
+	<div class="bar bar-header item-input-inset">
+	  <label class="item-input-wrapper">
+	    <i class="icon ion-ios-search placeholder-icon"></i>
+	    <input type="search" placeholder="Search">
+	  </label>
+	  
+	</div>
+	
+</h1>
+<button class="button button-icon icon ion-ios-chatbubble-outline"></button>
+  </ion-header-bar>	
+<ion-content>
+	<div class="fltitle">
+		<img src="http://s16.mogucdn.com/p2/160902/upload_8f08e2a43gch3k70d9abfcbdd7bcg_750x98.png_750x999.v1c7E.70.webp" alt="" />
+	</div>
+	<ul class="flmain">
+		
+		<li ng-repeat="item in list.topfl[0].data[15325].list"><a href="{{item.link}}"><img src="{{item.image}}" alt="上衣" /></a></li>
+			
+	</ul>
+	
+	<div class="flrxtitle">
+		<img src="http://s16.mogucdn.com/p2/160902/upload_0019l9a7geh10e34ca98153h3hakg_750x98.png_750x999.v1c7E.70.webp" alt="" />
+	</div>
+	<div class="flrxmain" ng-repeat="item in list.bottomfl[0].data">
+		<p>
+			<span>热销女装</span>
+			<a href="#">查看更多</a>
+		</p>
+		<ul class="flrxlist">
+			<li ng-repeat="ii in item.list"><a href="{{ii.link}}"><img src="{{ii.image}}"/></a></li>
+			
+			
+		</ul>
+	</div>
+	
+	
+</ion-content>
+</ion-view>

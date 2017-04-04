@@ -1,0 +1,93 @@
+<ion-view view-title="美丽说">
+	<ion-header-bar class="bar-stable bar-light" style="background:#ffffff">
+  	<button class="button button-icon icon ion-ios-search-strong"></button>
+    <h1 class="title" >
+    	<div class="bar bar-header item-input-inset">
+		  <label class="item-input-wrapper">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input type="search" placeholder="Search" id="search">
+		  </label>
+		  
+		</div>
+		
+    </h1>
+    <button class="button button-icon icon ion-ios-chatbubble-outline"></button>
+  
+</ion-header-bar>
+<ion-content>
+	
+<ion-slide-box class="i-banner" auto-play="true" does-continue="true" on-slide-changed="slideHasChanged(index)" >
+	<ion-slide>
+	      <div class="box">
+	     	<img src="img/index/banner1.jpg"/>
+	      </div>
+	</ion-slide>
+	<ion-slide>
+	      <div class="box">
+	     <img src="img/index/banner2.jpg" alt="" />
+	      </div>
+	</ion-slide>
+	<ion-slide>
+	      <div class="box">
+	     <img src="img/index/banner3.jpg" alt="" />
+	      </div>
+	</ion-slide>
+	<ion-slide>
+	      <div class="box">
+	     <img src="img/index/banner4.jpg" alt="" />
+	      </div>
+	</ion-slide>
+	<ion-slide>
+	      <div class="box">
+	     <img src="img/index/banner5.jpg" alt="" />
+	      </div>
+	</ion-slide>
+	<ion-slide>
+	      <div class="box">
+	     <img src="img/index/banner6.jpg" alt="" />
+	      </div>
+	</ion-slide>
+</ion-slide-box>
+		
+<div class="goodslist">
+	<dl class="goodsitem" ng-repeat="item in list">
+		<dt>
+			<a href="{{item.originUrl}}" name="index">
+				<img src="{{item.image}}"/>
+				<span class="imgtm"></span>
+				<span class="imgtmtit">
+					
+					<p>{{item.title}}</p>
+					<p>{{item.subtitle}}</p>
+					<p>{{item.butDesc}}</p>
+				</span>
+			</a>
+			
+		</dt>
+		<dd>
+		
+			<ion-scroll zooming="true" direction="x" style="width:auto" scrollbar-x="false">
+        		<div style="width:500rem">
+        			<div class="imgitem" ng-repeat="imgitem in item.goodsList
+">
+						<a href="#/meilishuo/index/{{imgitem.id}}"><img src="{{imgitem.image}}" /></a>
+
+        				
+        				<p>{{imgitem.title}}</p>
+        				<p class="imgprice">￥{{imgitem.price}}</p>
+        				
+        			</div>
+        		</div>
+      		</ion-scroll>
+		</dd>
+		
+	</dl>
+</div>
+
+
+<div class="splist">
+	
+</div>
+
+</ion-content>
+</ion-view>

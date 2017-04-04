@@ -1,0 +1,33 @@
+<ion-view view-title="其他页面">
+	<div class="bar bar-header bar-light">
+		<!--<ion-nav-buttons side="left">
+			<button class="button button-clear" menu-toggle="left">
+				<i class="icon ion-navicon"></i>
+			</button>
+		</ion-nav-buttons>-->
+		<h1 class="title">我的购物车</h1>
+
+	</div>
+	<ion-content class="has-header" ng-controller="shopcar">
+		<ion-list>
+
+			<ion-item class="gwclist" ng-repeat="item in str">
+
+				<div class="gwcimg"><img src="{{item.image}}"></div>
+
+				<div class="gwcxq">
+					<span>商品名称：{{item.title}}</span></span>
+					<p>商品单价：<span style="color:red">￥{{item.price}}</span></p>
+					<p>
+
+
+						<span>商品数量：{{item.sl}}</span>
+
+					</p>
+	<p style="font-size: 1.2rem;">总计：<span style="color:red">￥{{item.price*item.sl|number:2}}</span></p>
+				</div>
+
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+<ion-view view-title="登录-美丽说">
+<div class="bar bar-header bar-light">
+	<button class="button button-clear"><i class="ion ion-ios-arrow-left"></i></button>
+	<h1 class="title">登录-美丽说</h1>
+	<a class="button button-clear" href="regist.html">注册</a>
+</div>
+
+
+<ion-content class="has-header">
+<div class="my-main" ng-controller="ctrlLogin">
+	<div class="logintx">
+		<a href="/user/connect/qq">
+			<img src="img/mine/qq-login.png" alt="" />
+		</a>
+	</div>
+	<div class="logintit">
+		<span>美丽说账号登录</span>
+	</div>
+	<form action="" method="post">
+		<input type="text" value="" placeholder="昵称/邮箱/手机号" id="username"/>
+		<input type="text" value="" placeholder="密码" id="password"/>
+	</form>
+	<button id="btn" ng-click="tap()">登录</button>
+	<p><a href="#">忘记密码？</a></p>
+	
+</div>
+
+</ion-content>
+
+
+
+</ion-view>
