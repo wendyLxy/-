@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>蜜芽，中国领先的母婴市场</title>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1x3sj0ek7onoecdi.css" />
+		<script type="text/javascript">
+			$(function() {
+				$("#header-Cart").load("index.html .header-top-first")
+				$("#Cart1").load("index.html .Xinlai");
+				$("#Cart2").load("index.html .phone");
+				$("#Cart3").load("index.html .footer");
+				if($.cookie("shop")) {
+					var dat = JSON.parse($.cookie("shop"));
+					var shu = $.cookie("shu");
+					$(".shopwrap").show();
+					$(".MyCartshop").hide();
+					var html1 = "<a href='#'><img src=" + dat[0].Bigimg + "/></a>"
+					$(".tiajia-img").html(html1);
+					var html2 = "<img src=" + dat[0].img2 + "/>"
+					$(".xiangq-img").html(html2);
+					var html3 = "<a href='#'>" + dat[0].loname + "</a>";
+					$(".tzname").html(html3);
+					var html4 = dat[0].bianhao;
+					$(".goodon").html(html4);
+					var html5 = "<p class='zhenshi'>" + dat[0].renmin + "</p><p class='jiade'>" + dat[0].sijia + "</p>"
+					$(".tianjia-price").html(html5);
+					$(".zongjia span").text(dat[0].zongjia);
+					$(".jiajian-c input").val(shu);
+					$(".xuan strong").text(shu);
+					$(".jiajian-c input").val(shu);
+				} else {
+					$(".shopwrap").hide();
+					$(".MyCartshop").show();
+				}
+
+				//购物车里面   添加和删除要购买的数量
+				var num = 1;
+				$(".jiajian-c input").val(num);
+				var j = Number($(".zongjia span").text());
+				$(".heji strong").text(j);
+				$(".jiajia").click(function() {
+					$(".jianjian").css("background-position-y", "-22px");
+					num++;
+					var n = j * num;
+					$(".zongjia span").text(n);
+					$(".ze .heji strong").text(n);
+					if(num　 >= 16) {
+						num = 16;
+						$(this).css("background-position-y", "0");
+					}
+					$(".jiajian-c input").val(num);
+					$(".xuan strong").text($(".jiajian-c input").val());
+				})
+				$(".jianjian").click(function() {
+					$(".jiajia").css("background-position-y", "-22px");
+					num--;
+					if(num <= 1) {
+						$(this).css("background-position-y", "0");
+						num = 1;
+					}
+					var n = j * num;
+					$(".zongjia span").text(n);
+					$(".ze .heji strong").text(n);
+					$(".jiajian-c input").val(num);
+					$(".xuan strong").text($(".jiajian-c input").val());
+				})
+				/*购物车里 删除商品*/
+				$(".caozuo p a").click(function() {
+					$("#zhezhao").show();
+					$("#xunwen").show();
+				})
+				$("#xunwen .anniua .quxiao").click(function() {
+					$("#zhezhao").hide();
+					$("#xunwen").hide();
+				})
+				$("#xunwen .anniua .qued").click(function() {
+					$("#zhezhao").hide();
+					$("#xunwen").hide();
+					$.removeCookie("shop",{path:"/"});
+					$.removeCookie("shu",{path:"/"});
+				})
+				$(".check1").click(function(){
+					$(".check").prop("checked");
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="header-Cart"></div>
+		<div id="Cart-mainTop">
+			<div class="CartTop-con">
+				<div class="CartCon-logo">
+					<a href="#">
+						<img src="img/logo.png" />
+					</a>
+				</div>
+				<div class="CartCon-buzhou">
+					<ul>
+						<li class="currt">1.我的购物车</li>
+						<li>2.填写核对订单信息</li>
+						<li>3.成功提交订单</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="mycart">
+			<!--未添加商品样式-->
+			<div class="MyCartshop">
+				<div class="empty">
+					<p class="yahui">您还没有为您可爱的宝宝挑选任何商品哦~</p>
+					<p>
+						您可以去
+						<a href="index.html">首页</a>
+						挑选宝宝喜欢的商品
+					</p>
+				</div>
+			</div>
+			<!--添加商品后的样式-->
+			<div class="shopwrap">
+				<h2><span>我的购物车</span></h2>
+				<div class="Cart-menu">
+					<label>
+						<input class="check1" type="checkbox" checked="checked" />
+						全选
+					</label>
+					<ul>
+						<li class="ci0">商品</li>
+						<li class="ci1">规格</li>
+						<li class="ci2">单价</li>
+						<li class="ci3">数量</li>
+						<li class="ci4">小计</li>
+						<li class="ci5">操作</li>
+					</ul>
+				</div>
+				<div class="c-tianjia">
+					<div class="tianjia-con">
+						<div class="tianjia-con-top">
+							<input class="check" type="checkbox" checked="checked" />
+							<span>蜜芽自营</span>
+						</div>
+						<div class="tianjia-con-s">
+							<div class="tianjia-anniu">
+								<input class="check" type="checkbox" checked="checked" />
+								<span class="ooo">爆款直降</span>
+								<span class="qqq">爆款直降</span>
+							</div>
+							<div class="tianjia-a">
+								<div class="tianjia-a-a">
+									<div class="input-check">
+										<input class="check" type="checkbox" checked="checked" />
+									</div>
+									<div class="tiajia-img">
+
+									</div>
+									<div class="tiajia-xiangq">
+										<div class="xiangq-img">
+
+										</div>
+										<p class="tzname">
+
+										</p>
+										<p class="goodon"></p>
+									</div>
+									<div class="tianjia-price">
+
+									</div>
+									<div class="jiajian">
+										<div class="jiajian-c">
+											<span class="jianjian"></span>
+											<input type="text" readonly="readonly" />
+											<span class="jiajia"></span>
+										</div>
+									</div>
+									<div class="zongjia">
+										￥
+										<span></span>
+									</div>
+									<div class="caozuo">
+										<p>
+											<a href="#">
+												删除
+											</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="countn">
+					<div class="funcs">
+						<div class="funcs-inout">
+							<input type="checkbox" checked="checked" />
+						</div>
+						<label>全选</label>
+						<a href="#">删除选择商品</a>
+						<a href="#">清除无效商品</a>
+						<a href="#">移入收藏夹</a>
+					</div>
+					<div class="newCart">
+						<div class="ze">
+							<span class="xuan">
+								已选择商品 
+								<strong>1</strong>
+								 件
+							</span>
+							<span class="heji">
+								合计（不含运费和进口税）：￥ 
+								<strong></strong>
+							</span>
+						</div>
+					</div>
+					<a class="jiesuan" href="#">去结算</a>
+				</div>
+			</div>
+		</div>
+		<div id="Cart1"></div>
+		<div id="Cart2"></div>
+		<div id="Cart3"></div>
+		<!--两侧滚动显现出来-->
+		<div id="gundong-left">
+			<img src="img/c28f17d15a13149cfa89f18dc32efb87.png" />
+		</div>
+		<div id="gundong-right">
+			<ul>
+				<li>
+					<a href="#">
+						<i class="iconfont icon-tubiao4"></i> 购物车
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="iconfont icon-zixun"></i> 咨询
+					</a>
+				</li>
+				<li class="hua-kefu">
+					<a href="#">
+						<i class="iconfont icon-dianhua"></i> 客服
+						<div class="huachulai">
+							<img src="img/021418966c32c2a97ad1f55c92759762920175425.png" />
+						</div>
+					</a>
+				</li>
+				<li class="hua-weixin">
+					<a href="#">
+						<i class="iconfont icon-weixin"></i> 微信
+						<div class="huachulai2">
+							<img src="img/b27d68cb715a9401f7944d0709d312c1986326127.png" />
+						</div>
+					</a>
+				</li>
+			</ul>
+			<div class="gundong-right-top">
+				<p class="iconfont icon-triangle-copy"></p>
+			</div>
+		</div>
+
+		<!--遮罩层  和询问弹窗-->
+		<div id="zhezhao"></div>
+		<div id="xunwen">
+			<h3>删除宝贝</h3>
+			<p class="qs">确定要删除该商品么？</p>
+			<p class="anniua">
+				<span class="qued">确定</span>
+				<span class="quxiao">取消</span>
+			</p>
+		</div>
+
+	</body>
+
+</html>

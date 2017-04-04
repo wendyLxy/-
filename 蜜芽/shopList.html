@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商品列表</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1x3sj0ek7onoecdi.css" />
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/template.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.dls {
+				display: none;
+			}
+			
+			.header-nav-our i {
+				position: absolute;
+				left: 130px;
+				top: 0;
+				margin-left: 40px;
+				font-size: 30px;
+			}
+			
+			.header-nav-our:hover i {
+				transform: rotate(-180deg);
+				transition: all 0.3s;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				$(".header-nav-con").hover(function() {
+					$(".dls").show();
+				}, function() {
+					$(".dls").hide();
+				})
+				$.ajax({
+					type: "get",
+					url: "json/shopList.json",
+					async: true,
+					success: function(data) {
+						var html = template("List", data);
+						$(".shopList-top").html(html);
+						var shangp = template("shangp", data);
+						$(".shopList-content").html(shangp);
+						$(".smore").click(function() {
+							$(".contenter").css("height", "auto");
+							$(".smore").text("收起");
+						})
+						$(".shopLists-con").hover(function() {
+							$(this).find("figure").addClass("hover2");
+							$(this).find("figure").find("p").css("height", "auto");
+						}, function() {
+							$(this).find("figure").find("p").css("height", "22px");
+							$(this).find("figure").removeClass("hover2");
+						})
+					}
+				});
+
+			})
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$("#xin1").load("index.html .Xinlai");
+				$("#xin2").load("index.html .phone");
+				$("#xin3").load("index.html .footer");
+				var sh = JSON.parse($.cookie("shop"));
+				var shu = $.cookie("shu");
+				var html = "<img src=" + sh[0].Bigimg + "/>";
+				$(".zuijin-left").html(html);
+				var html1 = "<a href='#'>" + sh[0].loname + "</a><span>" + sh[0].renmin + "</span><i>×" + shu + "</i>";
+				$(".zuijin-right").html(html1);
+				//购物车划过样式
+				$("#header .logo-shopping").hover(function() {
+					$("#header .logo-shopping").find("div").show();
+					if($.cookie("shop")) {
+						$(".shopping-hide-a").hide();
+						$(".shopping-hide-b").show();
+					} else {
+						$(".shopping-hide-a").show();
+						$(".shopping-hide-b").hide();
+					}
+
+				}, function() {
+					$("#header .logo-shopping").find("div").hide();
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="header">
+			<div class="header-top">
+				<div class="header-top-first">
+					<div class="shouji">
+						<a href="#">
+							<i class="iconfont icon-shouji" style="color: #fa4b9b;"></i> 手机密芽
+						</a>
+					</div>
+					<div class="denglu-zhuce">
+						<p>你好，欢迎来到蜜芽！</p>
+						<a href="register.html">登录</a>
+						<span>|</span>
+						<a href="#">注册</a>
+						<a href="#">帮助中心</a>
+					</div>
+				</div>
+				<div class="logo w1100">
+					<a href="#">
+						<img src="img/logo.png" />
+					</a>
+					<div class="logo-search">
+						<form action="get">
+							<input type="text" id="txt" placeholder="请输入关键字……" />
+							<input type="button" id="btn" value="搜索" />
+						</form>
+						<div class="logo-shopping">
+							<a href="#" class="aaaa">
+								<span class="iconfont icon-tubiao4"></span> 购物车
+								<i class="gouwuche"></i>
+
+							</a>
+							<div class="shopping-hide">
+								<div class="shopping-hide-a">
+									购物车还没有商品，赶紧去添加吧！
+								</div>
+								<div class="shopping-hide-b">
+									<h3>最近添加的商品</h3>
+									<div class="zuijin-shop">
+										<div class="zuijin-left">
+
+										</div>
+										<div class="zuijin-right">
+
+										</div>
+									</div>
+									<div class="my-s">
+										<a href="#">查看我的购物车</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<ul class="logo-nav">
+							<li>
+								<a class="logo-nav-a" href="#">护臀霜</a><span>|</span></li>
+							<li>
+								<a class="logo-nav-a" href="#">面条</a><span>|</span></li>
+							<li>
+								<a class="logo-nav-a" href="#">机能鞋</a><span>|</span></li>
+							<li>
+								<a class="logo-nav-a" href="#">哺乳内衣</a><span>|</span></li>
+							<li>
+								<a class="logo-nav-a" href="#">鱼油</a><span>|</span></li>
+							<li>
+								<a class="logo-nav-a" href="#">安抚玩具</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="header-nav">
+					<div class="header-nav-con w1100">
+						<div class="header-nav-our">
+							<h3>全部商品分类
+								
+							</h3>
+							<i class="iconfont icon-xiajiantou1-copy"></i>
+						</div>
+						<div class="dls">
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+									<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+										<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+									<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+									<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+									<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+									<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+									<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+							<dl>
+								<dd>
+									<div class="dls-one">
+										<span></span>
+										<p>
+
+											<i class="iconfont icon-jiantouyou"></i>
+										</p>
+									</div>
+								</dd>
+								<dt>
+										<div class="colms">
+										<div class="colm">
+											<h3>奶粉专区</h3>
+											<p>
+												<a href="#">婴儿奶粉</a>
+												<a href="#">成长奶粉</a>
+												<a href="#">羊奶粉</a>
+												<a href="#">特配奶粉</a>
+												<a href="#">妈妈奶粉</a>
+												<a href="#">成人奶粉</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>屁屁护理</h3>
+											<p>
+												<a href="#">纸尿裤</a>
+												<a href="#">拉拉裤</a>
+												<a href="#">隔屁垫/布尿裤</a>
+												<a href="#">宝宝湿巾</a>
+											</p>
+										</div>
+
+										<div class="colm">
+											<h3>全球奶粉大全</h3>
+											<p>
+												<a href="#">德国爱他美</a>
+												<a href="#">德国Hipp</a>
+												<a href="#">德国Topofer</a>
+												<a href="#">荷兰Nutrilon</a>
+												<a href="#">荷兰Herobaby</a>
+												<a href="#">英国CWO&Gate</a>
+												<a href="#">澳洲AP</a>
+												<a href="#">德国holloe</a>
+												<a href="#">英国AP</a>
+												<a href="#">授权行货惠氏启赋</a>
+												<a href="#">港版美赞臣</a>
+												<a href="#">授权行货爱他美</a>
+												<a href="#">授权行货诺优能</a>
+												<a href="#">授权行货 喜宝</a>
+												<a href="#">美国Mead</a>
+											</p>
+										</div>
+										<div class="colm">
+											<h3>全球纸尿裤大牌</h3>
+											<p>
+												<a href="#">尤妮佳</a>
+												<a href="#">花王</a>
+												<a href="#">GOON大王天使</a>
+												<a href="#">GOON大王维E</a>
+												<a href="#">Pampers帮宝舒</a>
+												<a href="#">Pampers care帮宝适绵柔</a>
+												<a href="#">Huggies Gold好奇金装</a>
+												<a href="#">Huggies platinum好奇铂金装</a>
+												<a href="#">Mamypoko妈咪宝贝</a>
+												<a href="#">Libero丽贝乐</a>
+												<a href="#">Bella Baby Happy贝拉宝贝</a>
+												<a href="#">BioFities爱婴舒坦</a>
+												<a href="#">BAMBO班博</a>
+											</p>
+										</div>
+									</div>
+									<div class="brands">
+										<h3>全球热卖品牌</h3>
+										<p>
+											<a href="#">
+												<img src="img/nai01.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai02.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai03.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai04.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai05.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nai06.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi07.jpg"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi08.png"/>
+											</a>
+											<a href="#">
+												<img src="img/nsi09.jpg"/>
+											</a>
+										</p>
+									</div>
+								</dt>
+							</dl>
+						</div>
+
+					</div>
+					<ul>
+						<li class="active">
+							<a href="#">首页</a>
+						</li>
+						<li>
+							<a href="#">纸尿裤</a>
+						</li>
+						<li>
+							<a href="#">奶粉</a>
+						</li>
+						<li>
+							<a href="#">
+								正品保证
+								<i class="iconfont icon-xiajiantou1-copy"></i>
+							</a>
+							<ul class="erji">
+								<li>
+									<a href="#">正品保证</a>
+								</li>
+								<li>
+									<a href="#">退货政策</a>
+								</li>
+								<li>
+									<a href="#">帮助中心</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">早教音乐</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="shopList-wrap">
+			<div class="w1100 shopList-con">
+				<div class="shopList-top">
+					<script type="text/html" id="List">
+						{{each prouctList as item}}
+						<div class="shopList-top-lists">
+							<div class="key">{{item.title}}</div>
+							<div class="contenter">
+								<div class="kcon">
+									{{each item.List as item}}
+									<a href="#">{{item}}</a>
+									{{/each}}
+								</div>
+								<div class="smore">
+									{{item.geng}}
+									<i class="{{item.class}}"></i>
+								</div>
+							</div>
+
+						</div>
+						{{/each}}
+					</script>
+				</div>
+				<div class="shopList-middle">
+					<div class="middle-left">
+						<span class="hover">
+							<em>人气</em>
+						</span>
+						<span>
+							<em>销量</em>
+						</span>
+						<span>
+							<em>新品</em>
+						</span>
+						<span>
+							<em>价格</em>
+						</span>
+						<span>
+							
+						</span>
+						<label>
+							<em>
+								<input type="checkbox" />
+								只显示有货
+							</em>
+						</label>
+					</div>
+					<div class="middle-right"></div>
+				</div>
+				<div class="shopList-content">
+					<script type="text/html" id="shangp">
+						{{each shangpin as item}}
+						<div class="shopLists-con">
+							<figure>
+								<a href="Product.html"><img src="{{item.img}}" /></a>
+								<figcaption>
+									<div class="money">
+										<span class="yo">{{item.jiage1}}</span>
+										<span class="kuai">{{item.jiage2}}</span>
+										<span class="shan">{{item.jiage3}}</span>
+									</div>
+									<p>
+										<span>{{item.jijian}}</span>
+										<a href="Product.html">{{item.title}}</a>
+									</p>
+									<div class="baokuan">
+										<span>{{item.jiang}}</span> {{item.jiang}}
+									</div>
+								</figcaption>
+							</figure>
+						</div>
+						{{/each}}
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<div id="xin1"></div>
+		<div id="xin2"></div>
+		<div id="xin3"></div>
+		<!--两侧滚动显现出来-->
+		<div id="gundong-left">
+			<img src="img/c28f17d15a13149cfa89f18dc32efb87.png" />
+		</div>
+		<div id="gundong-right">
+			<ul>
+				<li>
+					<a href="#">
+						<i class="iconfont icon-tubiao4"></i> 购物车
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="iconfont icon-zixun"></i> 咨询
+					</a>
+				</li>
+				<li class="hua-kefu">
+					<a href="#">
+						<i class="iconfont icon-dianhua"></i> 客服
+						<div class="huachulai">
+							<img src="img/021418966c32c2a97ad1f55c92759762920175425.png" />
+						</div>
+					</a>
+				</li>
+				<li class="hua-weixin">
+					<a href="#">
+						<i class="iconfont icon-weixin"></i> 微信
+						<div class="huachulai2">
+							<img src="img/b27d68cb715a9401f7944d0709d312c1986326127.png" />
+						</div>
+					</a>
+				</li>
+			</ul>
+			<div class="gundong-right-top">
+				<p class="iconfont icon-triangle-copy"></p>
+			</div>
+		</div>
+	</body>
+
+</html>
